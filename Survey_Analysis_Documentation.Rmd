@@ -1,0 +1,81 @@
+#Survey Analysis Documentation 
+
+##Overview of Template
+
+In this template, we first load the required packages (tidyverse and quanteda). We then read the survey data from a CSV file into a data frame using read_csv(). Next, we create a corpus from the survey responses using the corpus() function from quanteda.
+
+After creating the corpus, we perform text cleaning and preprocessing using various functions from quanteda such as tokens(), tokens_remove(), and tokens_tolower(). This prepares the text data for analysis.
+
+Next, we demonstrate two examples of qualitative analysis techniques. First, we calculate word frequencies using the dfm() and topfeatures() functions. Adjust the parameters as needed, such as the minimum term frequency and the number of top features to display.
+
+Second, we perform topic modeling using Latent Dirichlet Allocation (LDA) with the textstat_topics() function. Adjust the number of topics (n) as needed.
+
+Finally, we print the results of the qualitative analysis.
+
+Remember to replace "survey_data.csv" with the actual file name of your survey data, and modify the code to fit your specific analysis needs and goals.
+
+##Introduction to 'quanteda'
+
+The `quanteda` package in R is a powerful and comprehensive package for text analysis and natural language processing (NLP). It provides a wide range of functions and tools for cleaning, preprocessing, analyzing, and visualizing text data.
+
+Here are some key features and functionalities of the `quanteda` package:
+
+### Corpus Creation and Text Preprocessing
+
+- Create a corpus: The `corpus()` function allows you to create a corpus object, which is a collection of text documents.
+- Tokenization: The `tokens()` function splits text into individual units such as words, sentences, or n-grams.
+- Text cleaning: Various functions like `tokens_remove()`, `tokens_select()`, and `tokens_tolower()` help in removing stopwords, selecting specific tokens, converting text to lowercase, and more.
+- Stemming and lemmatization: `tokens_wordstem()` and `tokens_lookup()` provide options for stemming and lemmatization.
+
+### Document-Feature Matrices
+
+- The `dfm()` function converts tokenized text into a document-feature matrix (DFM). It represents the frequency or presence/absence of features (words, n-grams, etc.) across different documents.
+- Additional functions like `dfm_trim()`, `dfm_select()`, and `dfm_weight()` allow for further customization of the DFM.
+
+### Text Analysis and Visualization
+
+- Word frequencies: `textstat_frequency()` calculates the frequency of words in a corpus.
+- N-grams: `textstat_ngrams()` extracts n-grams (e.g., bi-grams, tri-grams) from text data.
+- Topic modeling: `textstat_topics()` performs topic modeling using techniques like Latent Dirichlet Allocation (LDA).
+- Sentiment analysis: `textstat_sentiment()` provides tools for sentiment analysis of text data.
+- Concordance analysis: `textstat_concordance()` allows for analyzing word contexts and concordance lines.
+- Co-occurrence analysis: `textstat_collocations()` identifies statistically significant co-occurring word pairs.
+- Word clouds, bar plots, and other visualizations: The package integrates with `ggplot2` and other visualization packages to create visually appealing representations of text data.
+
+### Text Classification and Machine Learning
+
+- `quanteda` supports various machine learning algorithms for text classification and sentiment analysis, such as naive Bayes, support vector machines (SVM), and random forests.
+- Functions like `textmodel_nb()`, `textmodel_svm()`, and `textmodel_rf()` enable building and evaluating text classification models.
+
+### Integration with Other Packages
+
+- `quanteda` integrates well with other popular R packages for data manipulation (`dplyr`, `tidyr`), visualization (`ggplot2`), and statistical modeling (`stats`, `lme4`).
+- It also supports interoperability with other text analysis packages in R, such as `tm`, `tidytext`, and `textmineR`.
+
+The `quanteda` package provides a comprehensive set of tools for text analysis, making it suitable for a wide range of applications, including social sciences, marketing research, computational linguistics, and more. Its user-friendly syntax and extensive documentation make it accessible to both beginners and experienced users in the field of text analysis and NLP.
+
+##Introduction to Tidyverse
+
+The tidyverse is not a single package but rather a collection of packages in R that are designed to work together for data manipulation, exploration, and visualization. The philosophy behind the tidyverse is centered around the principles of tidy data and providing a consistent grammar of data manipulation.
+
+The tidyverse includes several popular and widely used packages, including:
+
+- **dplyr**: Provides a set of functions for data manipulation, such as filtering rows, selecting columns, arranging data, summarizing data, and joining datasets.
+
+- **ggplot2**: Offers a powerful and flexible system for creating visualizations, allowing you to build plots layer by layer with a consistent grammar of graphics.
+
+- **tidyr**: Provides tools for reshaping and tidying data, including functions like `gather()` and `spread()` for converting data between wide and long formats.
+
+- **readr**: Offers fast and efficient functions for reading and writing data in various formats, such as CSV, TSV, and Excel files.
+
+- **purrr**: Provides a functional programming toolkit for working with data, allowing you to apply functions to data structures, iterate over lists or vectors, and perform other operations.
+
+- **stringr**: Offers functions for working with strings, including pattern matching, string manipulation, and regular expressions.
+
+- **forcats**: Provides functions for working with categorical variables, including reordering factors, combining levels, and recoding factor levels.
+
+These are just a few examples of the packages included in the tidyverse. Each package has its own set of functions and capabilities, but they all follow the same underlying principles of tidy data and a consistent grammar of data manipulation.
+
+To use the tidyverse packages, you can install them individually using the `install.packages()` function, or you can install the entire tidyverse collection by running `install.packages("tidyverse")`. Once installed, you can load the tidyverse by using the `library(tidyverse)` function, which will automatically load all the packages included in the collection.
+
+By leveraging the tidyverse packages, you can streamline your data analysis workflows, write clean and readable code, and take advantage of a wide range of powerful tools for data manipulation, exploration, and visualization in R.

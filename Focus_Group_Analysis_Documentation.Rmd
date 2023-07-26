@@ -1,0 +1,73 @@
+---
+title: Qualitative Analysis of Focus Group Data
+output: html_document
+---
+
+# Introduction
+This RMarkdown document provides documentation for the code that performs qualitative analysis on the results of a focus group. The code demonstrates techniques such as coding, categorizing, and analyzing the data using the `tm`, `dplyr`, and `ggplot2` packages in R.
+
+## Step 1: Load Required Libraries
+```{r eval = FALSE}
+library(tm)      # Text mining
+library(dplyr)   # Data manipulation
+library(ggplot2) # Data visualization
+```
+
+## Step 2: Define the Focus Group Data
+Replace the focus_group variable with your own focus group data. The data should be stored as a character vector, where each element represents a participant's response.
+
+```{r eval = FALSE}
+focus_group <- c(
+  "Participant 1: I really liked the new product. It's innovative and useful.",
+  "Participant 2: The product design could be improved. It's not user-friendly.",
+  "Participant 3: I found the product to be too expensive for what it offers.",
+  "Participant 4: The customer support was excellent. They were very responsive.",
+  "Participant 5: I didn't understand how to use the product. It needs better instructions."
+)
+```
+
+## Step 3: Create a Document-Term Matrix
+The code converts the focus group data into a document-term matrix using the tm package. The matrix represents the frequency of words in the focus group responses.
+
+```{r eval = FALSE}
+corpus <- Corpus(VectorSource(focus_group))
+corpus <- tm_map(corpus, content_transformer(tolower))
+corpus <- tm_map(corpus, removePunctuation)
+corpus <- tm_map(corpus, removeNumbers)
+corpus <- tm_map(corpus, removeWords, stopwords("english"))
+corpus <- tm_map(corpus, stripWhitespace)
+dtm <- DocumentTermMatrix(corpus)
+
+```
+
+## Step 4: Convert the Document-Term Matrix to a Data Frame
+The document-term matrix is converted to a data frame for further analysis. Each row of the data frame represents a document (participant response), and each column represents a term (word).
+
+```{r eval = FALSE}
+dtm_df <- as.data.frame(as.matrix(dtm))
+dtm_df <- dtm_df %>%
+  mutate(Document = row.names(.)) %>%
+  select(Document, everything())
+```
+
+## Step 5: Perform Coding and Categorization
+The code assigns coding labels (e.g., "Positive" or "Negative") to each document based on their content. Modify the coding labels and conditions according to your analysis requirements.
+
+```{r eval = FALSE}
+dtm_df$coding <- NA
+dtm_df$coding[dtm_df$Document == "Participant 1"] <- "Positive"
+dtm_df$coding[dtm_df$Document == "Participant 2"] <- "Negative"
+dtm_df$coding[dtm_df$Document == "Participant 3"] <- "Negative"
+dtm_df$coding[dtm_df$Document == "Participant 4"] <- "Positive"
+dtm_df$coding[dtm_df$Document == "Participant 5"] <- "Negative"
+```
+
+## Step 6: Analyze and Visualize the Coding Results
+The code summarizes the coding results and creates a bar plot to visualize the counts of each coding category.
+
+```{r eval = FALSE}
+coding_summary <- dtm_df %>%
+  group_by(coding) %>%
+  summarize(count = n())
+```
+
